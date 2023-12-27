@@ -40,9 +40,7 @@ class LinkedList:
             self.head = new_node
         self.length += 1
 
-    def insert(
-        self, index, value
-    ):  # Edge cases here are insertion at first[index 0], negative index and index more than the available index
+    def insert(self, index, value):
         new_node = Node(value)
         if index < 0 or index > self.length:
             return False
@@ -54,17 +52,33 @@ class LinkedList:
             self.head = new_node
         else:
             temp_node = self.head
-            for _ in range(
-                index - 1
-            ):  # TC of this loop is O(n) in worst case. All others operations have TC of O(1)
+            for _ in range(index - 1):
                 temp_node = temp_node.next
             new_node.next = temp_node.next
             temp_node.next = new_node
         self.length += 1
         return True
 
+    def traverse(self):
+        current = self.head
+        while current is not None:
+            print(current.value)
+            current = current.next
 
-# Overall time complexity of insert function is O(n) due to the for loop. SC is O(1) as no additional memory is required to do this operation
+    def search(self, target):
+        current = self.head
+        index = 0
+        while (
+            current is not None
+        ):  # TC of this while loop is O(n) and other operations is O(1)
+            if current.value == target:
+                return (index, True)
+            current = current.next
+            index += 1
+        return (-1, False)
+
+
+# TC of this search method is O(n) due to the for loop while SC is O(1) as no extra space is required to do this operation
 
 newlinkedlist = LinkedList()
 newlinkedlist.append(10)
@@ -74,4 +88,5 @@ print(newlinkedlist)
 newlinkedlist.prepend(5)
 print(newlinkedlist)
 newlinkedlist.insert(1, 69)
-print(newlinkedlist)
+newlinkedlist.traverse()
+print(newlinkedlist.search(5))
