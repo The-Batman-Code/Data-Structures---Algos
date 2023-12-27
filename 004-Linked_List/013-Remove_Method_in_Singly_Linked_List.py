@@ -129,6 +129,23 @@ class LinkedList:
         return popped_node
         # TC of this method is O(n) due to the loop. SC is O(1) as no extra space is required
 
+    def remove(
+        self, index
+    ):  # Here the edge cases are removal from index 0, index which is greater than the length of the list, index which is negative, last index which still points to tail
+        if index >= self.length or index < 0:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop_last()  # This takes O(n) TC
+        prev_node = self.get(index - 1)  # This take O(N) TC
+        popped_node = prev_node.next
+        prev_node.next = popped_node.next
+        popped_node.next = None
+        self.length -= 1
+        return popped_node
+        # TC of this method is O(n) as other operations are O(1) TC operations. SC is O(1) as there as no DS that scale with the input size
+
 
 newlinkedlist = LinkedList()
 newlinkedlist.append(10)
@@ -147,4 +164,6 @@ print(newlinkedlist)
 print(newlinkedlist.pop_first().value)
 print(newlinkedlist)
 newlinkedlist.pop_last()
+print(newlinkedlist)
+newlinkedlist.remove(1)
 print(newlinkedlist)
