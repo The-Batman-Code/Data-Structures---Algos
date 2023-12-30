@@ -37,7 +37,7 @@ class CSLinkedList:
 
     # TC of the above method is O(n) and SC is O(1) as no extra sapce is required
 
-    def prepend(self, value):
+    def prepend(self, value):  # Here edge case is when the CLL is empty
         new_node = Node(value)
         if self.head == None:
             self.head = new_node
@@ -48,6 +48,8 @@ class CSLinkedList:
             self.head = new_node
             self.tail.next = new_node
         self.length += 1
+
+    # TC and SC of the above method is O(1) as all operations take O(1) time and space
 
 
 new_cs_linked_list = CSLinkedList()
