@@ -10,7 +10,7 @@ class CSLinkedList:
         self.tail = None
         self.length = 0
 
-    def append(self, value):
+    def append(self, value):  # Here edge case is when the CLL is empty
         new_node = Node(value)
         if self.length == 0:
             self.head = new_node
@@ -37,6 +37,18 @@ class CSLinkedList:
 
     # TC of the above method is O(n) and SC is O(1) as no extra sapce is required
 
+    def prepend(self, value):
+        new_node = Node(value)
+        if self.head == None:
+            self.head = new_node
+            self.tail = new_node
+            new_node.next = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+            self.tail.next = new_node
+        self.length += 1
+
 
 new_cs_linked_list = CSLinkedList()
 new_cs_linked_list.append(10)
@@ -48,4 +60,6 @@ new_cs_linked_list.append(90)
 print(new_cs_linked_list.head.value)
 print(new_cs_linked_list.head.next.value)
 print(new_cs_linked_list.tail.value)
+print(new_cs_linked_list)
+new_cs_linked_list.prepend(69)
 print(new_cs_linked_list)
