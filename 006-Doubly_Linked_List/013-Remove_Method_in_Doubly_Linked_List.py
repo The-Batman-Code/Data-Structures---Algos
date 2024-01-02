@@ -108,6 +108,84 @@ class DLinkedList:
 
     # TC of the above method is O(n) and SC is O(1)
 
+    def insert(
+        self, index, value
+    ):  # Here the edge case is when we want to insert at the beginning, at the end of the list, negative index and index greater than the length of the list
+        if index < 0 or index > self.length:
+            print("Index out of bounds")
+            return
+        new_node = Node(value)
+        if index == 0:
+            self.prepend(value)
+            return
+        elif index == self.length:
+            self.append(value)
+            return
+        temp_node = self.get(
+            index - 1
+        )  # The get method takes O(n) TC while all others take O(1)
+        new_node.next = temp_node.next
+        new_node.prev = temp_node
+        temp_node.next.prev = new_node
+        temp_node.next = new_node
+        self.length += 1
+
+    # TC of the above method is O(n) and SC is O(1) as there is no extra space needed
+
+    def pop_first(
+        self,
+    ):  # Here edge cases are empty list and one element present in the list
+        if not self.head:
+            return None
+        popped_node = self.head
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+            popped_node.next = None
+        self.length -= 1
+        return popped_node
+        # TC of the above method is O(1) and SC is also O(1)
+
+    def pop_last(
+        self,
+    ):  # Here the edge case is when there is no element in the list and when there is one element in the list
+        if not self.head:
+            return None
+        popped_node = self.tail
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.prev
+            popped_node.prev = None
+            self.tail.next = None
+        self.length -= 1
+        return popped_node
+
+    # TC of the above method is O(1) and SC is also O(1)
+
+    def remove(
+        self, index
+    ):  # Here the edge cases are when the index is 0, the last index, when the index is greater than the length of the list and when the index is negative
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop_last()
+        popped_node = self.get(index)  # The get method takes O(n) TC
+        popped_node.prev.next = popped_node.next
+        popped_node.next.prev = popped_node.prev
+        popped_node.next = None
+        popped_node.prev = None
+        self.length -= 1
+        return popped_node
+
+    # TC of the above method is O(n) and SC is also O(1)
+
 
 new_doubly_linked_list = DLinkedList()
 new_doubly_linked_list.append(10)
@@ -128,4 +206,12 @@ new_doubly_linked_list.reverse_traverse()
 print(new_doubly_linked_list.search(10))
 print(new_doubly_linked_list.get(5))
 new_doubly_linked_list.set_value(5, 1)
+print(new_doubly_linked_list)
+new_doubly_linked_list.insert(7, 0)
+print(new_doubly_linked_list)
+new_doubly_linked_list.pop_first()
+print(new_doubly_linked_list)
+new_doubly_linked_list.pop_last()
+print(new_doubly_linked_list)
+new_doubly_linked_list.remove(5)
 print(new_doubly_linked_list)

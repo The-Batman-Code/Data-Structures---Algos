@@ -108,6 +108,30 @@ class DLinkedList:
 
     # TC of the above method is O(n) and SC is O(1)
 
+    def insert(
+        self, index, value
+    ):  # Here the edge case is when we want to insert at the beginning, at the end of the list, negative index and index greater than the length of the list
+        if index < 0 or index > self.length:
+            print("Index out of bounds")
+            return
+        new_node = Node(value)
+        if index == 0:
+            self.prepend(value)
+            return
+        elif index == self.length:
+            self.append(value)
+            return
+        temp_node = self.get(
+            index - 1
+        )  # The get method takes O(n) TC while all others take O(1)
+        new_node.next = temp_node.next
+        new_node.prev = temp_node
+        temp_node.next.prev = new_node
+        temp_node.next = new_node
+        self.length += 1
+
+    # TC of the above method is O(n) and SC is O(1) as there is no extra space needed
+
 
 new_doubly_linked_list = DLinkedList()
 new_doubly_linked_list.append(10)
@@ -128,4 +152,8 @@ new_doubly_linked_list.reverse_traverse()
 print(new_doubly_linked_list.search(10))
 print(new_doubly_linked_list.get(5))
 new_doubly_linked_list.set_value(5, 1)
+print(new_doubly_linked_list)
+new_doubly_linked_list.insert(7, 0)
+print(new_doubly_linked_list)
+new_doubly_linked_list.pop_first()
 print(new_doubly_linked_list)
