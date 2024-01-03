@@ -119,6 +119,40 @@ class DCLinkedList:
 
     # TC and SC of the above method is O(n) and O(1) respectively
 
+    def delete(self, index):
+        if self.head is None:
+            return None
+        else:
+            if index == 0:
+                if self.head == self.tail:
+                    self.head.prev = None
+                    self.head.next = None
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.head = self.head.next
+                    self.head.prev = self.tail
+                    self.tail.next = self.head
+            elif index == self.length - 1:
+                if self.head == self.tail:
+                    self.head.prev = None
+                    self.head.next = None
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.tail = self.tail.prev
+                    self.tail.next = self.head
+                    self.head.prev = self.tail
+            else:
+                temp = self.head
+                for _ in range(index - 1):  # This take O(n) TC
+                    temp = temp.next
+                temp.next = temp.next.next
+                temp.next.next.prev = temp
+        self.length -= 1
+
+    # TC of the above method is O(n) and SC is O(1)
+
 
 new_dcs_linked_list = DCLinkedList()
 new_dcs_linked_list.append(10)
@@ -134,3 +168,5 @@ print(new_dcs_linked_list)
 new_dcs_linked_list.traverse()
 new_dcs_linked_list.reverse_traverse()
 print(new_dcs_linked_list.search(0))
+new_dcs_linked_list.delete(5)
+print(new_dcs_linked_list)
