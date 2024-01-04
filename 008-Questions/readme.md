@@ -8,4 +8,4 @@
 
 ### 4. Two numbers are represented as linked list consisting of thier digits with head pointing to the ones place of each digit. Sum both the numbers and give the answer in the same linked list way.
 
-### 5.
+### 5.Given two singly linked lists, determine if the two lists intersect. Return the intersecting node.
