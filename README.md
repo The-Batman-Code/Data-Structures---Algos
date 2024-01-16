@@ -1,3 +1,3 @@
 # Data-Structures-Algos
 
-### Doing something I am forced to do😒
+### Giving my mind a run for it's money🍻
