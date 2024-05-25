@@ -6,5 +6,7 @@ def bubbleSort(customList):
     print(customList)
 
 
+# TC and SC of the above method is O(n^2) and O(1) resp
+
 clist = [6, 3, 9, 5, 7, 1, 0]
 bubbleSort(clist)
